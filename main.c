@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
     struct sockaddr_storage serverStorage;
     socklen_t addr_size, client_addr_size;
 
-    int nb_clients = 1;
+    int nb_clients = 0;
     struct client clients[255] = {{0, 0}};
 
     int trace = 0;
