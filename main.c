@@ -79,11 +79,14 @@ int main(int argc, char *argv[]){
             // Changement d'état
             // Char -> int
             char etat_c = buffer[strlen(buffer)-1];
-            printf("Buffer %s\n", buffer);
             int etat = etat_c - '0';
 
-            char client_id_c = buffer[strlen(buffer)-1] = '\0';
-            int client_id = client_id_c - '0';
+            // Copie du buffer
+            char tmp_buf[1024];
+            strncpy(tmp_buf, buffer, 1024);
+            // Récupération du numéro du client
+            tmp_buf[strlen(tmp_buf)-1] = '\0';
+            int client_id = atoi(tmp_buf);
 
             clients[client_id].etat = etat;
 
