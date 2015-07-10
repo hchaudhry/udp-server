@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
     struct sockaddr_storage serverStorage;
     socklen_t addr_size, client_addr_size;
 
-    int nb_clients = 25;
+    int nb_clients = 1;
     struct client clients[255] = {{0, 0}};
 
     int trace = 0;
@@ -79,6 +79,7 @@ int main(int argc, char *argv[]){
             // Changement d'état
             // Char -> int
             char etat_c = buffer[strlen(buffer)-1];
+            printf("Buffer %s\n", buffer);
             int etat = etat_c - '0';
 
             char client_id_c = buffer[strlen(buffer)-1] = '\0';
