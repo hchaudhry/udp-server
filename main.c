@@ -13,6 +13,8 @@ struct client {
 
 void print_clients(struct client clients[], int size);
 
+void get_state(struct client clients[] ,int idClient);
+
 int main(int argc, char *argv[]){
 
     int udpSocket, nBytes;
@@ -54,6 +56,15 @@ int main(int argc, char *argv[]){
         /* Réception d'un message */
         nBytes = recvfrom(udpSocket, buffer, 1024, 0, (struct sockaddr *)&serverStorage, &addr_size);
 
+        s = strstr(buffer, "state");
+        if (s != NULL) {
+            char *received;
+            received = strtok(buffer, "s");
+
+            int idClient = atoi(received);
+            get_state(clients, idClient);
+        }
+
         s = strstr(buffer, "deco");
         if (s != NULL) {
             char *received;
@@ -93,6 +104,8 @@ int main(int argc, char *argv[]){
             snprintf(buffer, sizeof(buffer), "%d", clients[client_id].etat);
         }
 
+
+
         /* Renvoi du message*/
         sendto(udpSocket, buffer, nBytes, 0, (struct sockaddr *)&serverStorage, addr_size);
 
@@ -114,4 +127,18 @@ void print_clients(struct client clients[], int size) {
         }
     }
     printf("------\n");
+}
+
+void get_state(struct client clients[] ,int idClient) {
+    int i;
+    for(i = 1; i < 255; i++)
+    {
+        if(clients[i].id == idClient)
+        {
+            printf("Demande de l'état du client n°%d\n", idClient);
+            printf("Etat: %d\n", clients[i].etat);
+            printf("------\n");
+            break;
+        }
+    }
 }

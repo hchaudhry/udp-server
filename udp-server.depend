@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1437238299 source:/home/lionel/Bureau/udp-server/main.c
+	<stdio.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<string.h>
+	<stdlib.h>
+
